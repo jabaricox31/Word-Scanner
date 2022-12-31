@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <utility>
 #include <iomanip>
+#include <fstream>
 
 
  /**
@@ -45,11 +46,13 @@ void clean_entry(const std::string& old_word, std::string& cleaned_word)
  * clean_entry() function to get rid of the punctuation if their is any. Then, it
  * stores that word in the map.
  ************************************************************************/
-void get_words(std::map<std::string, int>& temp_map)
+void get_words(std::map<std::string, int>& temp_map, std::string filename)
 {
 
+   std::ifstream object(filename);
+
    std::string input;
-   while(std::cin >> input) //Loop that processes all the words
+   while(object >> input) //Loop that processes all the words
    {
 
 
@@ -103,10 +106,14 @@ void print_words(const std::map<std::string, int>& print_map)
 
 int main()
 {
+   std::string filename;
+
+   std::cout<<"What is the file that you would like to scan? ";
+   std::cin >> filename;
 
    std::map<std::string, int> map1; //Declaring the map object that will hold and print values
 
-   get_words(map1);// Calling the get_words method to get all of the values cleaned and put in the map
+   get_words(map1, filename);// Calling the get_words method to get all of the values cleaned and put in the map
 
    print_words(map1); //Calling the print_words method to print out the value in the map.
 
